@@ -6,12 +6,13 @@ Created on Jan 3, 2019
 import pygame 
 from direction import Direction
 class Person():
-    
-    def __init__(self,x,y,spd,boundary):
+    def __init__(self,x,y,spd,boundary,window,image):
         self.spd = spd
         self.x = x 
         self.y = y
         self.boundary = boundary
+        self.window = window
+        self.image = image
     def move(self):
         keys = pygame.key.get_pressed()
         x_change = 0 
@@ -30,3 +31,8 @@ class Person():
             x_change = 0
         self.x += x_change
         self.y += y_change
+        if keys[pygame.K_SPACE]:
+            pass
+        
+    def draw(self):
+        self.window.blit(self.image,(self.x,self.y))
