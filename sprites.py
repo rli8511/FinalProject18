@@ -15,8 +15,6 @@ def get_sprite(file,rect):
     image.blit(sheet,(0,0),rect)
     return image
 
-player_one_sprite = get_sprite(filename,(0,0,45,55))
-
 def make_transparent(sprites,color):
     """Take in a list of sprites and make their background transparent"""
     t_sprites = []
@@ -24,3 +22,7 @@ def make_transparent(sprites,color):
         sprite.set_colorkey(color)
         t_sprites.append(sprite)   
     return t_sprites
+
+player_one_sprite = get_sprite(filename,(0,0,45,55))
+player_one_sprite.set_colorkey((255,255,255))
+

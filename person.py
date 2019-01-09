@@ -20,13 +20,13 @@ class Person():
         if keys[pygame.K_LEFT] and self.x >= self.spd:
             x_change -= self.spd
             y_change = 0
-        if keys[pygame.K_RIGHT] and self.x + 16 < self.boundary:
+        if keys[pygame.K_RIGHT] and self.x + 16 < self.boundary[0]:
             x_change += self.spd
             y_change = 0
         if keys[pygame.K_UP] and self.y >= self.spd:
             y_change -= self.spd
             x_change = 0
-        if keys[pygame.K_DOWN] and self.y + 16 < self.boundary:
+        if keys[pygame.K_DOWN] and self.y + 16 < self.boundary[1]:
             y_change += self.spd
             x_change = 0
         self.x += x_change
