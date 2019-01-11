@@ -4,15 +4,19 @@ Created on Jan 3, 2019
 @author: RayL
 '''
 import pygame 
-from direction import Direction
+from normalprojectile import Normal_Projectile
 class Person():
-    def __init__(self,x,y,spd,boundary,window,image):
+    def __init__(self,x,y,size,spd,boundary,window,image,direction):
         self.spd = spd
         self.x = x 
         self.y = y
         self.boundary = boundary
         self.window = window
+        self.size = size
         self.image = image
+        self.hitbox = (self.x,self.y,self.size[0],self.size[1])
+        self.direction = direction
+        self.projectiles = []
     def move(self):
         keys = pygame.key.get_pressed()
         x_change = 0 
@@ -32,7 +36,13 @@ class Person():
         self.x += x_change
         self.y += y_change
         if keys[pygame.K_SPACE]:
-            pass
+            print(self.size[1]/2)
+            self.projectiles.append(Normal_Projectile(self.x + self.size[0],
+                                          self.y,
+                                          10,
+                                          self.direction,
+                                          self.window,
+                                          5))
         
     def draw(self):
         self.window.blit(self.image,(self.x,self.y))

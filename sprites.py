@@ -23,6 +23,8 @@ def make_transparent(sprites,color):
         t_sprites.append(sprite)   
     return t_sprites
 
+def change_size(sprite,size):
 player_one_sprite = get_sprite(filename,(0,0,45,55))
 player_one_sprite.set_colorkey((255,255,255))
+pygame.transform.scale(player_one_sprite, (16,16))
 
