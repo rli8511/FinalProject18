@@ -11,7 +11,7 @@ class Game():
     
     def __init__(self,window):
         self.window = window
-        self.playerone = Person(0,0,(16,16),5,(500,500),self.window,player_one_sprite,Direction.right)
+        self.playerone = Person(0,window.get_height()-100,5,(500,500),self.window,player_one_sprite,Direction.right)
     
     def draw(self):
         self.window.fill((0,0,0))
@@ -32,4 +32,3 @@ class Game():
             self.draw()
             for projectile in self.playerone.projectiles:
                 projectile.move()
-            print(self.playerone.projectiles)

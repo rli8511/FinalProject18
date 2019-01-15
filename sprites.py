@@ -15,16 +15,27 @@ def get_sprite(file,rect):
     image.blit(sheet,(0,0),rect)
     return image
 
-def make_transparent(sprites,color):
+def change_size(sprite,size):
+    return pygame.transform.scale(sprite,(size))
+
+def prepare_sprite(sprite,color,size,flip = False):
+    """Take in a list of sprites and make their background transparent"""
+    sprite.set_colorkey(color)
+    if flip == True:
+        return pygame.transform.flip(pygame.transform.scale(sprite,size),True,False)
+    return pygame.transform.scale(sprite,size)
+
+def prepare_sprites(sprites,color,size,flip = False):
     """Take in a list of sprites and make their background transparent"""
     t_sprites = []
     for sprite in sprites:
         sprite.set_colorkey(color)
-        t_sprites.append(sprite)   
+        if flip:
+            t_sprites.append(pygame.transform.flip(pygame.transform.scale(sprite,size),True,False))
+        else:
+            t_sprites.append(pygame.transform.scale(sprite,size))   
     return t_sprites
 
-def change_size(sprite,size):
-player_one_sprite = get_sprite(filename,(0,0,45,55))
-player_one_sprite.set_colorkey((255,255,255))
-pygame.transform.scale(player_one_sprite, (16,16))
 
+player_one_sprite = get_sprite(filename,(0,0,45,55))
+player_one_sprite = prepare_sprite(player_one_sprite,(255,255,255),(32,32),True)
