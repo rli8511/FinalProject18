@@ -5,7 +5,8 @@ Created on Jan 3, 2019
 '''
 import pygame
 filename = "test_sprites.png"
-
+bg = "bg.png"
+platform = "platform.png"
 def get_sprite(file,rect):
     """Get a sprite at a certain rectangle in the sprite sheet"""
     sheet = pygame.image.load(file)
@@ -38,4 +39,8 @@ def prepare_sprites(sprites,color,size,flip = False):
 
 
 player_one_sprite = get_sprite(filename,(0,0,45,55))
-player_one_sprite = prepare_sprite(player_one_sprite,(255,255,255),(32,32),True)
+player_one_sprite = prepare_sprite(player_one_sprite,(255,255,255),(64,64),True)
+bg = pygame.image.load(bg)
+bg = prepare_sprite(bg,(0,0,0),(600,500))
+platform = pygame.image.load(platform)
+platform = prepare_sprite(platform,(255,255,255), (600,25))
