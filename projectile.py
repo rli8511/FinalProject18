@@ -3,7 +3,6 @@ Created on Jan 7, 2019
 
 @author: RayL
 '''
-import pygame
 from direction import Direction
 class Projectile():
     """Class that represents projectiles"""
@@ -13,7 +12,7 @@ class Projectile():
         self.spd = spd
         self.direction = direction
         self.window = window
-    
+        self.boundary = (self.window.get_width(),self.window.get_height())
     def move(self):
         """Move for a normal projectile"""
         if self.direction == Direction.right:

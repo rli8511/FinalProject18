@@ -6,8 +6,5 @@ Created on Jan 4, 2019
 from enum import Enum
 
 class Direction(Enum):
-    right = "RIGHT"
-    left = "LEFT"
-    up = "UP"
-    down = "DOWN"
-    
+    right = 1
+    left = 2

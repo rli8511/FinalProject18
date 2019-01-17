@@ -17,6 +17,5 @@ class Platform():
             person.stopped = True
             person.fallCount = 0   
             person.y = self.y - person.size[1]
-            
     def draw(self):
         self.window.blit(self.image,(0,self.y))
