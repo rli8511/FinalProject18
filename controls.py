@@ -13,10 +13,9 @@ class Controls(Enum):
               "Shoot":pygame.K_SPACE
               }
     
-    OKLColon = {"Right":pygame.K_SEMICOLON,
-              "Left":pygame.K_k,
-              "Jump":pygame.K_o,
-              "Fall":pygame.K_l,
-              "Shoot":pygame.K_RETURN   
+    OKLColon = {"Right":pygame.K_l,
+              "Left":pygame.K_j,
+              "Jump":pygame.K_i,
+              "Fall":pygame.K_k,
+              "Shoot":pygame.K_BACKSLASH
               }
-

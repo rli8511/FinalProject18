@@ -24,26 +24,31 @@ def get_sprite(file,rect = None):
     return image
 
 
-def prepare_sprite(sprite,color,size,flip = False):
-    """Take in a list of sprites and make their background transparent"""
+def prepare_sprite(sprite,color,size):
+    """Take in a sprite and make its background transparent and change its size"""
     sprite.set_colorkey(color)
-    if flip == True:
-        return pygame.transform.flip(pygame.transform.scale(sprite,size),True,False)
     return pygame.transform.scale(sprite,size)
 
-def prepare_sprites(sprites,color,size,flip = False):
-    """Take in a list of sprites and make their background transparent"""
+def prepare_sprites(sprites,color,size):
+    """Take in a list of sprites and make their background transparent and change their size"""
     t_sprites = []
     for sprite in sprites:
-        sprite.set_colorkey(color)
-        if flip:
-            t_sprites.append(pygame.transform.flip(pygame.transform.scale(sprite,size),True,False))
-        else:
-            t_sprites.append(pygame.transform.scale(sprite,size))  
+        t_sprites.append(pygame.transform.scale(sprite,size))  
     for sprite in t_sprites:
         sprite.set_colorkey(color) 
     return t_sprites
 
+def flip(sprites):
+    """Flip a list of sprites"""
+    f_sprites = []
+    for sprite in sprites:
+        if type(sprite) is list:
+            f_sprites.append([])
+            for s in sprite:
+                f_sprites[-1].append(pygame.transform.flip(s,True,False))
+        else:
+            f_sprites.append(pygame.transform.flip(sprite,True,False))
+    return f_sprites
 mega_walkRight = []
 mega_shootRight = []
 run = True
@@ -60,8 +65,7 @@ for x in range(0,10):
     #window.blit(mega_walkRight[i],(100,100))
     #pygame.display.update()
     #i += 1
-player_one_sprite = get_sprite(filename,(0,0,45,55))
-player_one_sprite = prepare_sprite(player_one_sprite,(255,255,255),(64,64),True)
+
 bg = pygame.image.load(bg)
 bg = prepare_sprite(bg,(0,0,0),(1000,1000))
 platform = get_sprite(platform)
@@ -72,4 +76,10 @@ mega_idle_right = prepare_sprite(mega_idle,(255,255,255),(64,64))
 mega_shootright = prepare_sprites(mega_shootRight,(255,255,255),(64,64))
 mega_shootidle = get_sprite("megaman/mega_shootidle.png")
 mega_shootidle = prepare_sprite(mega_shootidle,(255,255,255),(78,64))
-
+mega_jump = get_sprite("megaman/mega_jump.png")
+mega_jump = prepare_sprite(mega_jump,(255,255,255), (80,64))
+mega_jumpshoot = get_sprite("megaman/mega_shootjump.png")
+mega_jumpshoot = prepare_sprite(mega_jumpshoot, (255,255,255), (80,64))
+mega_sprites_right = [mega_walkright,mega_idle_right,mega_shootright,mega_shootidle,mega_jump,mega_jumpshoot]
+mega_sprites_left = flip(mega_sprites_right)
+print(mega_sprites_left)

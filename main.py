@@ -11,5 +11,7 @@ window_y = 600
 window = pygame.display.set_mode((window_x,window_y)) #Create window
 game = Game(window)
 game.play()
+
+
     
         
