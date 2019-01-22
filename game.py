@@ -18,29 +18,30 @@ class Game():
         self.window = window
         self.playerone = Person(0,
                                 575-64,
-                                20,
+                                10,
                                 (500-64,575-64),
                                 self.window,
                                 Characters.megaman_right,
                                 Direction.right,
-                                8,
+                                6,
                                 Controls.WASD,
-                                4)
+                                10)
         self.playertwo = Person(900,
                                 575-64,
-                                20,
+                                10,
                                 (500,575-64),
                                 self.window,
                                 Characters.megaman_left,
                                 Direction.left,
-                                8,
+                                6,
                                 Controls.OKLColon,
-                                4)
+                                10)
         
         self.platforms = [Platform(275,self.window,platform),
                           Platform(425,self.window,platform),
                           Platform(575,self.window,platform)]
     
+        self.clock = pygame.time.Clock()
     def main_menu(self):
         running = True
         while running: #Main loop for main menu.
@@ -61,7 +62,7 @@ class Game():
     def play(self):
         running = True
         while running: #Main loop
-            pygame.time.delay(50)
+            self.clock.tick(30)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False

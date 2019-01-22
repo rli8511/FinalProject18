@@ -16,7 +16,6 @@ class Person():
         self.window = window
         self.character = character
         self.size = character.value["size"]
-        self.hitbox = (self.x,self.y,self.size[0],self.size[1])
         self.direction = direction
         self.projectiles = []
         self.isJump = False
@@ -36,18 +35,14 @@ class Person():
         self.isAlive = True
         
     def getHit(self,projectile):
-        if self.direction == Direction.right:
-            if projectile.x <= self.x + self.size[0] and projectile.y >= self.y and projectile.y <= self.y + self.size[1]:
-                self.currenthealth -= 1
-                if self.currenthealth == 0:
-                    self.isAlive = False
-                return True
-        else:
-            if projectile.x >= self.x and projectile.y >= self.y and projectile.y <= self.y + self.size[1]:
-                self.currenthealth -= 1
-                if self.currenthealth == 0:
-                    self.isAlive = False
-                return True
+        if (projectile.x <= self.x + self.size[0] and 
+            projectile.x >= self.x and 
+            projectile.y >= self.y and 
+            projectile.y <= self.y + self.size[1]):
+            self.currenthealth -= 1
+            if self.currenthealth == 0:
+                self.isAlive = False
+            return True
         return False
     
     def move(self):
@@ -79,11 +74,11 @@ class Person():
         if keys[self.controls.value["Shoot"]]:
             if len(self.projectiles) < 7 and self.coolcounter == self.cooldown and not self.cooling:
                 self.projectiles.append(Normal_Projectile(self.x + self.size[0],
-                                              self.y + self.size[1]//2,
-                                              30,
+                                              round(self.y) + self.size[1]//2,
+                                              20,
                                               self.direction,
                                               self.window,
-                                              5))
+                                              8))
                 self.shooting = True
                 self.cooling = True
         else:
@@ -91,14 +86,14 @@ class Person():
         if self.isJump and not self.stopped and not self.falling:
             if self.jumpCount > 0:
                 self.y -= (self.jumpCount ** 2)
-                self.jumpCount -= 1
+                self.jumpCount -= 0.5
             else:
                 self.jumpCount = self.jumpStrength
                 self.falling = True
                 self.isJump = False
         if self.falling and not self.stopped:
             self.y += (self.fallCount**2)
-            self.fallCount += 1 
+            self.fallCount += 0.5
         else:
             self.fallCount = 0
             self.falling = False
