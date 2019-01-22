@@ -27,7 +27,7 @@ class Person():
         self.walkCount = 0
         self.moving = False
         self.shooting = False
-        self.cooldown = 10
+        self.cooldown = 18
         self.coolcounter = self.cooldown
         self.cooling = False
         self.health = health

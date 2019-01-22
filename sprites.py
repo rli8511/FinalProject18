@@ -8,6 +8,8 @@ filename = "test_sprites.png"
 bg = "bg.png"
 platform = "platform.png"
 megaman = "megaman_sprites.png"
+cursor = "cursor.jpg"
+button = "button.png"
 #window = pygame.display.set_mode((1000,500))
 
 def get_sprite(file,rect = None):
@@ -82,3 +84,7 @@ mega_jumpshoot = get_sprite("megaman/mega_shootjump.png")
 mega_jumpshoot = prepare_sprite(mega_jumpshoot, (255,255,255), (80,64))
 mega_sprites_right = [mega_walkright,mega_idle_right,mega_shootright,mega_shootidle,mega_jump,mega_jumpshoot]
 mega_sprites_left = flip(mega_sprites_right)
+cursor = get_sprite(cursor)
+cursor = prepare_sprite(cursor,(255,255,255), (64,64))
+button = get_sprite(button)
+button = prepare_sprite(button,(0,0,0),(256,64))

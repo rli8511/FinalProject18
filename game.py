@@ -11,11 +11,12 @@ from platform import Platform
 from sprites import platform
 from characters import Characters
 from controls import Controls
-
+from mainmenu import Mainmenu
 class Game():
     
     def __init__(self,window):
         self.window = window
+        self.fps = 30
         self.playerone = Person(0,
                                 575-64,
                                 10,
@@ -42,10 +43,20 @@ class Game():
                           Platform(575,self.window,platform)]
     
         self.clock = pygame.time.Clock()
+        
+        self.menu = Mainmenu(self.window)
+        
+    def drawmain_menu(self):
+        self.window.blit(bg,(0,0))
+        
     def main_menu(self):
         running = True
         while running: #Main loop for main menu.
-            pygame.time.delay(50)  
+            self.clock.tick(self.fps)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                
               
     def draw(self):
         self.window.blit(bg,(0,0))
@@ -62,15 +73,15 @@ class Game():
     def play(self):
         running = True
         while running: #Main loop
-            self.clock.tick(30)
+            self.clock.tick(self.fps)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
             self.playerone.move()
             self.playertwo.move()
             for platform in self.platforms:
-                platform.stop_person(self.playerone)
-                platform.stop_person(self.playertwo)
+                platform.stopPerson(self.playerone)
+                platform.stopPerson(self.playertwo)
             for projectile in self.playerone.projectiles:
                 if projectile.x > projectile.boundary[0]:
                     self.playerone.projectiles.pop(self.playerone.projectiles.index(projectile))

@@ -11,7 +11,7 @@ class Platform():
         self.window = window
         self.image = image
         
-    def stop_person(self,person):
+    def stopPerson(self,person):
         if person.falling and person.y + person.size[1] >= self.y - person.jumpStrength**2 and person.y + person.size[1] < self.y:
             person.falling = False
             person.stopped = True
