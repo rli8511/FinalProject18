@@ -7,7 +7,6 @@ from enum import Enum
 from sprites import mega_sprites_right
 from sprites import mega_sprites_left
 class Characters(Enum):
-    
     megaman_right = {"walk": mega_sprites_right[0],
                "idle": mega_sprites_right[1],
                "shootwalk": mega_sprites_right[2],

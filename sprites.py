@@ -8,7 +8,7 @@ filename = "test_sprites.png"
 bg = "bg.png"
 platform = "platform.png"
 megaman = "megaman_sprites.png"
-window = pygame.display.set_mode((1000,500))
+#window = pygame.display.set_mode((1000,500))
 
 def get_sprite(file,rect = None):
     """Get a sprite at a certain rectangle in the sprite sheet"""
@@ -82,4 +82,3 @@ mega_jumpshoot = get_sprite("megaman/mega_shootjump.png")
 mega_jumpshoot = prepare_sprite(mega_jumpshoot, (255,255,255), (80,64))
 mega_sprites_right = [mega_walkright,mega_idle_right,mega_shootright,mega_shootidle,mega_jump,mega_jumpshoot]
 mega_sprites_left = flip(mega_sprites_right)
-print(mega_sprites_left)

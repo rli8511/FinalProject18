@@ -7,7 +7,7 @@ import pygame
 from normalprojectile import Normal_Projectile
 from direction import Direction
 class Person():
-    def __init__(self,x,y,spd,boundary,window,character,direction,jumpStrength,controls):
+    def __init__(self,x,y,spd,boundary,window,character,direction,jumpStrength,controls,health):
         self.spd = spd
         self.x = x 
         self.y = y
@@ -31,6 +31,25 @@ class Person():
         self.cooldown = 10
         self.coolcounter = self.cooldown
         self.cooling = False
+        self.health = health
+        self.currenthealth = self.health
+        self.isAlive = True
+        
+    def getHit(self,projectile):
+        if self.direction == Direction.right:
+            if projectile.x <= self.x + self.size[0] and projectile.y >= self.y and projectile.y <= self.y + self.size[1]:
+                self.currenthealth -= 1
+                if self.currenthealth == 0:
+                    self.isAlive = False
+                return True
+        else:
+            if projectile.x >= self.x and projectile.y >= self.y and projectile.y <= self.y + self.size[1]:
+                self.currenthealth -= 1
+                if self.currenthealth == 0:
+                    self.isAlive = False
+                return True
+        return False
+    
     def move(self):
         x_change = 0
         if self.cooling:
@@ -88,6 +107,7 @@ class Person():
         else:
             self.moving = True
             self.x += x_change   
+            
     def draw(self):
         if self.isJump or self.falling: 
             if self.shooting:
@@ -108,5 +128,9 @@ class Person():
                     self.window.blit(self.character.value["idle"],(self.x,self.y))
         if self.walkCount == 9:
             self.walkCount = 0
+        pygame.draw.rect(self.window,(255,0,0),(self.x,self.y - 8,self.size[0],8))
+        pygame.draw.rect(self.window,(0,255,0),
+                         (self.x,self.y - 8,self.size[0] - (self.size[0]/self.health)*(self.health-self.currenthealth),
+                          8))
             
         

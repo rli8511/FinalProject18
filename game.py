@@ -24,7 +24,8 @@ class Game():
                                 Characters.megaman_right,
                                 Direction.right,
                                 8,
-                                Controls.WASD)
+                                Controls.WASD,
+                                4)
         self.playertwo = Person(900,
                                 575-64,
                                 20,
@@ -33,11 +34,18 @@ class Game():
                                 Characters.megaman_left,
                                 Direction.left,
                                 8,
-                                Controls.OKLColon)
+                                Controls.OKLColon,
+                                4)
+        
         self.platforms = [Platform(275,self.window,platform),
                           Platform(425,self.window,platform),
                           Platform(575,self.window,platform)]
-        
+    
+    def main_menu(self):
+        running = True
+        while running: #Main loop for main menu.
+            pygame.time.delay(50)  
+              
     def draw(self):
         self.window.blit(bg,(0,0))
         for platform in self.platforms:
@@ -65,9 +73,22 @@ class Game():
             for projectile in self.playerone.projectiles:
                 if projectile.x > projectile.boundary[0]:
                     self.playerone.projectiles.pop(self.playerone.projectiles.index(projectile))
-                projectile.move()
+                else:
+                    if self.playertwo.getHit(projectile):
+                        self.playerone.projectiles.pop(self.playerone.projectiles.index(projectile))
+                        if not self.playertwo.isAlive:
+                            running = False
+                            print("Player one won.")
+                    projectile.move()
             for projectile in self.playertwo.projectiles:
                 if projectile.x < 0:
                     self.playertwo.projectiles.pop(self.playertwo.projectiles.index(projectile))
-                projectile.move()
+                else:
+                    if self.playerone.getHit(projectile):
+                        self.playertwo.projectiles.pop(self.playertwo.projectiles.index(projectile))
+                        if not self.playerone.isAlive:
+                            running = False
+                            print("Player two won.")
+                    projectile.move()
             self.draw()
+        
