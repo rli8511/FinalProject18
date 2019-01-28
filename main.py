@@ -10,7 +10,7 @@ pygame.init() #Initialize pygame
 window_x = 1000 #Window size
 window_y = 600 
 window = pygame.display.set_mode((window_x,window_y)) #Create window
-
+pygame.display.set_caption("Megaman Battles")
 game = Game(window) #Initialize game and mainmenu
 menu = Mainmenu(window)
 
