@@ -3,7 +3,7 @@ Created on Jan 7, 2019
 
 @author: RayL
 '''
-from person import Person
+from person import Person #Import sprites and all other classes/enum classes
 from sprites import bg
 import pygame
 from direction import Direction
@@ -12,32 +12,34 @@ from sprites import platform
 from characters import Characters
 from controls import Controls
 from mainmenu import Mainmenu
+
 class Game():
+    """Game Class that puts all the entities of the game together."""
     
     def __init__(self,window):
+        """Constructor"""
         self.window = window
         self.fps = 30
         self.playerone = Person(0,
                                 575-64,
-                                10,
+                                Characters.megaman_right.value["hp"],
                                 (500-64,575-64),
                                 self.window,
                                 Characters.megaman_right,
                                 Direction.right,
                                 6,
                                 Controls.WASD,
-                                10)
+                                Characters.megaman_right.value["spd"])
         self.playertwo = Person(900,
                                 575-64,
-                                10,
+                                Characters.megaman_left.value["hp"],
                                 (500,575-64),
                                 self.window,
                                 Characters.megaman_left,
                                 Direction.left,
                                 6,
                                 Controls.OKLColon,
-                                10)
-        
+                                Characters.megaman_left.value["spd"])
         self.platforms = [Platform(275,self.window,platform),
                           Platform(425,self.window,platform),
                           Platform(575,self.window,platform)]

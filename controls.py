@@ -3,10 +3,13 @@ Created on Jan 16, 2019
 
 @author: RayL
 '''
-from enum import Enum
+from enum import Enum 
 import pygame
+
 class Controls(Enum):
-    WASD = {"Right":pygame.K_d,
+    """Enum Class for Control Schemes"""
+    
+    WASD = {"Right":pygame.K_d, 
               "Left":pygame.K_a,
               "Jump":pygame.K_w,
               "Fall":pygame.K_s,

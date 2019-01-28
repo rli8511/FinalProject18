@@ -4,7 +4,7 @@ Created on Jan 3, 2019
 @author: RayL
 '''
 import pygame 
-from normalprojectile import Normal_Projectile
+from projectile import Projectile
 from direction import Direction
 class Person():
     def __init__(self,x,y,spd,boundary,window,character,direction,jumpStrength,controls,health):
@@ -73,7 +73,7 @@ class Person():
             self.moving = True
         if keys[self.controls.value["Shoot"]]:
             if len(self.projectiles) < 7 and self.coolcounter == self.cooldown and not self.cooling:
-                self.projectiles.append(Normal_Projectile(self.x + self.size[0],
+                self.projectiles.append(Projectile(self.x + self.size[0],
                                               round(self.y) + self.size[1]//2,
                                               20,
                                               self.direction,
