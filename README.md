@@ -1,9 +1,12 @@
-# Intro to Programming Final Project - Fall 2018
+In "Megaman Battles," two players verse each other in an arena. Players cannot cross the middle, but shoot projectiles to kill the enemy. Players can jump and fall through platforms in order to improve their mobility. Good luck and have fun. 
+	
+“Pygame Front Page.” About - Pygame Wiki, www.pygame.org/docs/.
 
-* Project details are in description.md
-* Replace the content of this file with your own info about your project before the due date
-* Don't forget to fill out the [Project Proposal Form](https://airtable.com/shrrdA41unoBvi6Ki) before break.
+“Megaman Custom Sprites .:Updated:.” DeviantArt, 	www.deviantart.com/lucarioshirona/art/Megaman-Custom-sprites-Updated-37									        	7683787.
 
-## Setting Up Your Repo
+“Platform Png 1.” PNG Image Little Tree Png 4 Comments, 	pngimage.net/platform-png-1/.
 
-On the GitHub page for this repository, click the "Fork" button. This will create your own copy of this repository, linked to my original. Use the same cloning method we used before to clone the repository to your PythonAnywhere account
+Navigate main menu with arrow keys and enter. Press solidly. 
+
+
+	
