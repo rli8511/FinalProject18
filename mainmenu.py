@@ -16,6 +16,8 @@ class Mainmenu():
         pygame.font.init()
         self.buttonFont = pygame.font.Font("emulogic.ttf",15) #Prepare fonts
         self.tutorialFont = pygame.font.Font("emulogic.ttf",10)
+        self.titleFont = pygame.font.Font("emulogic.ttf",25)
+        self.title = self.titleFont.render("Megaman Battles", False, (0,0,0))
         self.playButton = Button(self.buttonFont.render("Play Game (2P)",
                                                         False,
                                                         (0,0,0)),
@@ -40,6 +42,7 @@ class Mainmenu():
     def draw(self):
         """Draw main menu"""
         self.window.blit(bg,(0,0)) #Draw background first
+        self.window.blit(self.title,(350,50)) #Draw title
         self.playButton.draw() #Draw buttons
         self.tutorialButton.draw()
         self.cursor.draw() #Draw cursor
@@ -65,14 +68,14 @@ class Mainmenu():
                 else:
                     self.buttonIndex -= 1 #Move the cursor up
             if keys[pygame.K_RETURN]: #If Enter is pressed
-                return self.buttons[self.buttonIndex].getDecision() #Return decision 
+                return self.buttons[self.buttonIndex].getDecision() #Return decision stored in selected button
             self.draw() #Draw
     
     def tutorial(self):
         run = True
         texts = [self.tutorialFont.render("There are two players in this game.",False,(0,0,0)),
         self.tutorialFont.render("Player one is on the left and player two is on the right.",False,(0,0,0)),
-        self.tutorialFont.render(" Player one uses WASD to move and space to shoot.", False, (0,0,0)),
+        self.tutorialFont.render("Player one uses WASD to move and space to shoot.", False, (0,0,0)),
         self.tutorialFont.render("Player two uses IJKL and Backslash (the button above enter) to shoot.",False,(0,0,0)),
         self.tutorialFont.render("Both players cannot cross the middle of the arena.",False,(0,0,0)),
         self.tutorialFont.render("Good luck and Have Fun! Press",False,(0,0,0)),
