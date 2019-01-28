@@ -3,16 +3,18 @@ Created on Jan 22, 2019
 
 @author: RayL
 '''
-from cursor import Cursor
+from cursor import Cursor #Import needed sprites/ classes
 from button import Button
 import pygame
 from sprites import bg
+
 class Mainmenu():
-    
+    """Class that represents the main menu"""
     def __init__(self,window):
-        self.window = window
+        """Constructor"""
+        self.window = window 
         pygame.font.init()
-        self.buttonFont = pygame.font.Font("emulogic.ttf",15)
+        self.buttonFont = pygame.font.Font("emulogic.ttf",15) #Prepare fonts
         self.tutorialFont = pygame.font.Font("emulogic.ttf",10)
         self.playButton = Button(self.buttonFont.render("Play Game (2P)",
                                                         False,
@@ -20,53 +22,51 @@ class Mainmenu():
                                                         self.window,
                                                         400,
                                                         150,
-                                                        1)
+                                                        1) #Initialize player button
         self.tutorialButton = Button(self.buttonFont.render("Read Tutorial",
                                                             False,
                                                             (0,0,0)),
                                                             self.window,
                                                             400,
                                                             300,
-                                                            2)     
-           
-        self.buttons = [self.playButton,self.tutorialButton]
-        self.buttonIndex = 0
+                                                            2)     #Initialize tutorial button
+        self.buttons = [self.playButton,self.tutorialButton] #List to hold buttons
+        self.buttonIndex = 0 #Index to see which button is chosen.
         self.cursor = Cursor(self.buttons[self.buttonIndex].x + 256,
                              self.buttons[self.buttonIndex].y,
-                             self.window)
+                             self.window) #Initialize cursor
         self.running = True
         
-    def moveCursor(self):
-        self.cursor.move(self.buttons[self.buttonIndex].y)
-    
     def draw(self):
-        self.window.blit(bg,(0,0))
-        self.playButton.draw()
+        """Draw main menu"""
+        self.window.blit(bg,(0,0)) #Draw background first
+        self.playButton.draw() #Draw buttons
         self.tutorialButton.draw()
-        self.cursor.draw()
-        pygame.display.update()
+        self.cursor.draw() #Draw cursor
+        pygame.display.update() #Update display
         
-    def play(self):
+    def run(self):
+        """Run the main menu"""
         while self.running:
-            pygame.time.delay(125)
-            self.moveCursor()
-            for event in pygame.event.get():
+            pygame.time.delay(125) #Delay to not take multiple inputs at once
+            self.cursor.move(self.buttons[self.buttonIndex].y) #Move the cursor
+            for event in pygame.event.get(): #Loop to check for user exit. 
                     if event.type == pygame.QUIT:
                         return 3
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_DOWN]:
-                if self.buttonIndex + 1 == len(self.buttons):
-                    self.buttonIndex = 0
+            keys = pygame.key.get_pressed() #Get keys
+            if keys[pygame.K_DOWN]: #If they pressed down
+                if self.buttonIndex + 1 == len(self.buttons): #If the index exceeds the list length
+                    self.buttonIndex = 0 #Move the cursor to the first button
                 else:
-                    self.buttonIndex += 1
-            if keys[pygame.K_UP]:
-                if self.buttonIndex - 1 == -1:
-                    self.buttonIndex = len(self.buttons) - 1
+                    self.buttonIndex += 1 #Move the cursor down.
+            if keys[pygame.K_UP]: #If up is pressed
+                if self.buttonIndex - 1 == -1: #If the index is less than 0
+                    self.buttonIndex = len(self.buttons) - 1 #Move the cursor to the last button
                 else:
-                    self.buttonIndex -= 1
-            if keys[pygame.K_RETURN]:
-                return self.buttons[self.buttonIndex].getDecision()
-            self.draw()    
+                    self.buttonIndex -= 1 #Move the cursor up
+            if keys[pygame.K_RETURN]: #If Enter is pressed
+                return self.buttons[self.buttonIndex].getDecision() #Return decision 
+            self.draw() #Draw
     
     def tutorial(self):
         run = True
@@ -77,19 +77,18 @@ class Mainmenu():
         self.tutorialFont.render("Both players cannot cross the middle of the arena.",False,(0,0,0)),
         self.tutorialFont.render("Good luck and Have Fun! Press",False,(0,0,0)),
         self.tutorialFont.render("Enter to go back to the main menu.",False,(0,0,0))
-        ]
-        self.window.blit(bg,(0,0))
+        ] #Tutorial text split into lines
+        self.window.blit(bg,(0,0)) #Blit background once.
         i = 0
-        for text in texts:
+        for text in texts: #Blit each line of text
             self.window.blit(text,(200,i))
             i += 30
-        pygame.display.update()
-        while run:
-            pygame.time.delay(100)
-            for event in pygame.event.get():
+        pygame.display.update() #Update display
+        while run: #Main loop
+            pygame.time.delay(100) #Delay
+            for event in pygame.event.get(): #Loop to check for user exit. 
                 if event.type == pygame.QUIT:
                     run = False
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_RETURN]:
+            if keys[pygame.K_RETURN]: #If enter is pressed, exit
                 run = False
-            print('Hello')

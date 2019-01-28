@@ -4,27 +4,20 @@ Created on Jan 3, 2019
 @author: RayL
 '''
 import pygame
-filename = "test_sprites.png"
+filename = "test_sprites.png" #Name for sprite files
 bg = "bg.png"
 platform = "platform.png"
 megaman = "megaman_sprites.png"
 cursor = "cursor.jpg"
 button = "button.png"
-#window = pygame.display.set_mode((1000,500))
 
-def get_sprite(file,rect = None):
-    """Get a sprite at a certain rectangle in the sprite sheet"""
-    sheet = pygame.image.load(file)
-    if rect is not None:
-        rect = pygame.Rect(rect)
-        image = pygame.Surface(rect.size)
-        image.blit(sheet,(0,0),rect)
-    else:
-        rect = pygame.Rect(sheet.get_rect())
-        image = pygame.Surface(rect.size)
-        image.blit(sheet,(0,0),rect)
+def get_sprite(file):
+    """Get the sprite from the image and turns the background white."""
+    file = pygame.image.load(file) #Load the image
+    rect = pygame.Rect(file.get_rect())#Create rectangle shape
+    image = pygame.Surface(rect.size) #Change rectangle into a surface
+    image.blit(file,(0,0),rect) #Blit the file image onto the rectangle surface
     return image
-
 
 def prepare_sprite(sprite,color,size):
     """Take in a sprite and make its background transparent and change its size"""
@@ -44,30 +37,22 @@ def flip(sprites):
     """Flip a list of sprites"""
     f_sprites = []
     for sprite in sprites:
-        if type(sprite) is list:
+        if type(sprite) is list: #If there is a list in the list, create a list in f_sprites 
             f_sprites.append([])
             for s in sprite:
-                f_sprites[-1].append(pygame.transform.flip(s,True,False))
+                f_sprites[-1].append(pygame.transform.flip(s,True,False)) #Append flipped images to the new list
         else:
-            f_sprites.append(pygame.transform.flip(sprite,True,False))
+            f_sprites.append(pygame.transform.flip(sprite,True,False)) #Simply append one flipped image to the list
     return f_sprites
 mega_walkRight = []
 mega_shootRight = []
 run = True
 i = 0
 for x in range(0,10):
-    mega_walkRight.append(get_sprite("megaman/mega_walkRight" + str(x) + ".png"))
+    mega_walkRight.append(get_sprite("megaman/mega_walkRight" + str(x) + ".png")) #Get sprites for walking
     mega_shootRight.append(get_sprite("megaman/mega_shootright" + str(x) + ".png"))
-#i = 0
-#while run:
-    #pygame.time.delay(1000)
-    #for event in pygame.event.get():
-        #if event.type == pygame.QUIT:
-        #run = False
-    #window.blit(mega_walkRight[i],(100,100))
-    #pygame.display.update()
-    #i += 1
 
+#Get all the sprites
 bg = pygame.image.load(bg)
 bg = prepare_sprite(bg,(0,0,0),(1000,1000))
 platform = get_sprite(platform)
